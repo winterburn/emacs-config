@@ -121,12 +121,17 @@
 
 (use-package magit
   :config
-  
     (my/leader-keys
       "g" '(:ignore t :which-key "git")
-      "g s" '(magit-status :which-key "status")
+      "g g" '(magit-status :which-key "status")
     )
   )
+
+(use-package company
+  :hook (after-init . global-company-mode))
+
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
   
 
 (custom-set-variables
@@ -137,7 +142,7 @@
  '(custom-safe-themes
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
  '(package-selected-packages
-   '(magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

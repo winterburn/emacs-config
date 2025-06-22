@@ -15,10 +15,17 @@
   "bb" '(counsel-switch-buffer :which-key "switch buffer")
   "bd" '(kill-this-buffer :which-key "kill buffer")
 
-  "w" '(:ignore :which-key "windows")
+  "w" '(:ignore t :which-key "windows")
   "ww" '(other-window :which-key "other window")
   "wv" '(split-window-right :which-key "vertical split")
   "ws" '(split-window-below :which-key "horizontal split")
   "wd" '(delete-window :which-key "close window")
+
+  "h" '(:ignore t :which-key "help")
+  "h d" '(:ignore t :which-key "describe")
+  "h d f" '(describe-function :which-key "function")
+  "h d v" '(describe-variable :which-key "variable")
+  "h d c" '(describe-command :which-key "command")
+  "h d k" '(describe-key :which-key "key")
 )
 (provide 'keybindings)
