@@ -53,6 +53,16 @@
   :custom
   (nerd-icons-font-family "Symbols Nerd Font Mono"))
 
+(defun my/doom-modeline-update-env ()
+  "Hijack the env update function and do some venv magic."
+  (if (derived-mode-p 'python-mode)
+      (let ((venv (getenv "VIRTUAL_ENV")))
+	(setq doom-modeline-env--version
+	      (when venv
+		(file-name-nondirectory (directory-file-name (file-name-parent-directory (getenv "VIRTUAL_ENV"))))))
+	       ))
+  )
+
 (use-package doom-themes
   :custom
   (doom-themes-enable-bold t)
@@ -63,7 +73,12 @@
   (doom-themes-org-config))
 
 (use-package doom-modeline
-  :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-env-version t)
+  (setq doom-modeline-env-enable-python t)
+  (setq doom-modeline-after-update-env-hook 'my/doom-modeline-update-env))
+
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -127,11 +142,27 @@
     )
   )
 
+(use-package lsp-mode
+  :hook (
+	 (python-mode . lsp)
+	 (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-pyright
+  :custom (lsp-pyright-langserver-command "pyright")
+  :hook (python-mode . (lambda ()
+			 (require 'lsp-pyright)
+			 (lsp))))
+
 (use-package company
   :hook (after-init . global-company-mode))
 
 (use-package envrc
   :hook (after-init . envrc-global-mode))
+
+(setq python-indent-offset 4)
   
 
 (custom-set-variables
@@ -142,7 +173,7 @@
  '(custom-safe-themes
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
  '(package-selected-packages
-   '(company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
