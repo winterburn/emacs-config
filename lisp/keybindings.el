@@ -27,5 +27,10 @@
   "h d v" '(describe-variable :which-key "variable")
   "h d c" '(describe-command :which-key "command")
   "h d k" '(describe-key :which-key "key")
-)
+
+  "c" '(:ignore t :which-key "code")
+  "c d" '(lsp-ui-peek-find-definitions :which-key "definition")
+  "c r" '(lsp-ui-peek-find-references :which-key "references")
+  "c c" '(lsp-rename :which-key "rename")
+ )
 (provide 'keybindings)

@@ -54,7 +54,7 @@
   (nerd-icons-font-family "Symbols Nerd Font Mono"))
 
 (defun my/doom-modeline-update-env ()
-  "Hijack the env update function and do some venv magic."
+  "Set the modeline to show current the name of the current uv .venv."
   (if (derived-mode-p 'python-mode)
       (let ((venv (getenv "VIRTUAL_ENV")))
 	(setq doom-modeline-env--version
@@ -119,6 +119,10 @@
   :config
   (evil-collection-init))
 
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode 1))
+
 (use-package general
   :after evil
   :init
@@ -146,24 +150,47 @@
   :hook (
 	 (python-mode . lsp)
 	 (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
+  :commands lsp
+  :config
+  (setq lsp-format-buffer-on-save t)
+  (lsp-headerline-breadcrumb-mode 1)
+  (setq lsp-headerline-breadcrumb-segments '(project file symbols)))
 
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 (use-package lsp-pyright
-  :custom (lsp-pyright-langserver-command "pyright")
-  :hook (python-mode . (lambda ()
-			 (require 'lsp-pyright)
-			 (lsp))))
+  :custom (lsp-pyright-langserver-command "pyright"))
 
+(use-package yasnippet
+  :hook
+  (after-init . yas-reload-all))
+(use-package yasnippet-snippets)
 (use-package company
   :hook (after-init . global-company-mode))
 
 (use-package envrc
   :hook (after-init . envrc-global-mode))
 
-(setq python-indent-offset 4)
-  
+(defmacro company-backend-for-hook (hook backends)
+  `(add-hook ,hook (lambda ()
+		     (set (make-local-variable 'company-backends)
+			  ,backends))))
+
+(defun my/setup-python-environment ()
+  "Setup a python development environment in the current buffer."
+  ;; Update the environment
+  (envrc--update)
+  (yas-minor-mode 1)
+  ;; setup active backends for python mode
+  (company-backend-for-hook 'lsp-completion-mode-hook
+			    '((company-capf :with company-yasnippet)
+			      company-dabbrev-code))
+  (require 'lsp-pyright)
+  (lsp-deferred))
+
+(add-hook 'python-mode-hook #'my/setup-python-environment)
+
+(setopt company-backends '((company-capf company-dabbrev-code)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -173,7 +200,7 @@
  '(custom-safe-themes
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
  '(package-selected-packages
-   '(lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
