@@ -123,6 +123,10 @@
   :config
   (global-evil-surround-mode 1))
 
+(use-package evil-commentary
+  :config
+  (evil-commentary-mode))
+
 (use-package general
   :after evil
   :init
@@ -192,6 +196,45 @@
 
 (setopt company-backends '((company-capf company-dabbrev-code)))
 
+(use-package projectile
+  :config
+  (setq projectile-project-search-path '(("~/repos/" . 1) ( "/mnt/d/Koodia/" . 1))))
+
+(use-package counsel-projectile
+  :init
+  (counsel-projectile-mode 1)
+  :config
+  (my/leader-keys
+    "p" 'projectile-command-map))
+
+(use-package centaur-tabs
+  :config
+  (centaur-tabs-mode t)
+  (setq centaur-tabs-style "wave"
+        centaur-tabs-set-icons t
+        centaur-tabs-icon-type 'nerd-icons
+        centaur-tabs-set-bar 'under
+        x-underline-at-descent-line t
+        centaur-tabs-set-close-button nil
+        centaur-tabs-set-modified-marker t
+        centaur-tabs-cycle-scope 'tabs
+	centaur-tabs-height 32)
+  (centaur-tabs-group-by-projectile-project)
+  :bind
+  (:map evil-normal-state-map
+	("g t" . centaur-tabs-forward)
+	("g T" . centaur-tabs-backward))
+  :config
+  (my/leader-keys
+    "t" '(:ignore t :switch-key "tabs")
+    "t g" '(centaur-tabs-counsel-switch-group :switch-key "select group")
+    "t t" '(centaur-tabs-forward :switch-key "tab forward")
+    "t T" '(centaur-tabs-backward :switch-key "tab backward")
+    "t u" '(centaur-tabs-backward-group :switch-key "group backward")
+    "t i" '(centaur-tabs-forward-group :switch-key "group forward")
+    "t k" '(centaur-tabs-kill-other-buffers-in-current-group :switch-key "kill other buffers")))
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -200,7 +243,7 @@
  '(custom-safe-themes
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
  '(package-selected-packages
-   '(yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

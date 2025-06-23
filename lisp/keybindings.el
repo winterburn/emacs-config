@@ -7,6 +7,7 @@
   :global-prefix "C-SPC")
 
 (my/leader-keys
+  "SPC" '(counsel-M-x :which-key "execute commands")
   "f" '(:ignore t :which-key "files")
   "ff" '(counsel-find-file :which-key "find file")
   "fs" '(save-buffer :which-key "save file")
