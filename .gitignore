@@ -1,0 +1,7 @@
+.lsp*
+elpa
+auto-save-list
+eln-cache
+transient
+*.eld
+*~
