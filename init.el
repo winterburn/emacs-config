@@ -197,6 +197,8 @@
 (setopt company-backends '((company-capf company-dabbrev-code)))
 
 (use-package projectile
+  :hook
+  (after-init . projectile-discover-projects-in-search-path)
   :config
   (setq projectile-project-search-path '(("~/repos/" . 1) ( "/mnt/d/Koodia/" . 1))))
 
@@ -208,6 +210,11 @@
     "p" 'projectile-command-map))
 
 (use-package centaur-tabs
+  :demand
+  :bind
+  (:map evil-normal-state-map
+	("g t" . centaur-tabs-forward)
+	("g T" . centaur-tabs-backward))
   :config
   (centaur-tabs-mode t)
   (setq centaur-tabs-style "wave"
@@ -220,20 +227,37 @@
         centaur-tabs-cycle-scope 'tabs
 	centaur-tabs-height 32)
   (centaur-tabs-group-by-projectile-project)
-  :bind
-  (:map evil-normal-state-map
-	("g t" . centaur-tabs-forward)
-	("g T" . centaur-tabs-backward))
-  :config
   (my/leader-keys
-    "t" '(:ignore t :switch-key "tabs")
-    "t g" '(centaur-tabs-counsel-switch-group :switch-key "select group")
-    "t t" '(centaur-tabs-forward :switch-key "tab forward")
-    "t T" '(centaur-tabs-backward :switch-key "tab backward")
-    "t u" '(centaur-tabs-backward-group :switch-key "group backward")
-    "t i" '(centaur-tabs-forward-group :switch-key "group forward")
-    "t k" '(centaur-tabs-kill-other-buffers-in-current-group :switch-key "kill other buffers")))
-
+    "t" '(:ignore t :which-key "tabs")
+    "t g" '(centaur-tabs-counsel-switch-group :which-key "select group")
+    "t t" '(centaur-tabs-forward :which-key "tab forward")
+    "t T" '(centaur-tabs-backward :which-key "tab backward")
+    "t u" '(centaur-tabs-backward-group :which-key "group backward")
+    "t i" '(centaur-tabs-forward-group :which-key "group forward")
+    "t k" '(centaur-tabs-kill-other-buffers-in-current-group :which-key "kill other buffers"))
+  (defun centaur-tabs-hide-tab (x)
+  "Do no to show buffer X in tabs."
+  (let ((name (format "%s" x)))
+    (or
+    ;; Current window is not dedicated window.
+    (window-dedicated-p (selected-window))
+    
+    ;; Buffer name not match below blacklist.
+    (string-prefix-p "*epc" name)
+    (string-prefix-p "*helm" name)
+    (string-prefix-p "*Helm" name)
+    (string-prefix-p "*Compile-Log*" name)
+    (string-prefix-p "*lsp" name)
+    (string-prefix-p "*company" name)
+    (string-prefix-p "*Flycheck" name)
+    (string-prefix-p "*tramp" name)
+    (string-prefix-p " *Mini" name)
+    (string-prefix-p "*help" name)
+    (string-prefix-p "*straight" name)
+    (string-prefix-p " *temp" name)
+    (string-prefix-p "*Help" name)
+    (string-prefix-p "magit" name)
+    ))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
