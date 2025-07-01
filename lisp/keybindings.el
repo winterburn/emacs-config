@@ -59,13 +59,3 @@
 
  )
 (provide 'keybindings)
-
-  "s" '(:ignore t :which-key "search")
-  "s p" '(projectile-ripgrep :which-key "search project")
-
-  "o" '(:ignore t :which-key "org")
-  "o a" '(org-agenda :which-key "agenda")
-  "o c" '(org-capture :which-key "capture")
-
- )
-(provide 'keybindings)
