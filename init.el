@@ -183,6 +183,14 @@
 (use-package envrc
   :hook (after-init . envrc-global-mode))
 
+(use-package dap-mode
+  :init
+  (setopt dap-auto-configure-mode t)
+  :after lsp-mode
+  :commands dab-debug
+  :hook ((python-mode . dap-mode)))
+
+
 (defmacro company-backend-for-hook (hook backends)
   `(add-hook ,hook (lambda ()
 		     (set (make-local-variable 'company-backends)
@@ -198,7 +206,9 @@
 			    '((company-capf :with company-yasnippet)
 			      company-dabbrev-code))
   (require 'lsp-pyright)
-  (lsp-deferred))
+  (lsp-deferred)
+  (require 'dap-python)
+  (setq dap-python-debugger 'debugpy))
 
 (add-hook 'python-mode-hook #'my/setup-python-environment)
 
@@ -267,6 +277,22 @@
     (string-prefix-p "magit" name)
     ))))
 
+(use-package consult
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :init
+  (advice-add #'register-preview :override #'consult-register-window)
+  (setq register-preview-delay 0.5)
+
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+  (autoload 'projectile-project-root "projectile")
+  (setq consult-project-function (lambda (_) (projectile-project-root)))
+  :config
+  (my/leader-keys
+    "s s" '(consult-line :which-key "search in buffer.")))
+(use-package consult-lsp)
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -275,7 +301,7 @@
  '(custom-safe-themes
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
  '(package-selected-packages
-   '(git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
