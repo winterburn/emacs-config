@@ -40,14 +40,25 @@
   "c n" '(flymake-goto-next-error :which-key "next error")
   "c p" '(flymake-goto-prev-error :which-key "previous error")
   "c b" '(:ignore t :which-key "debug")
-  "c b a" '(dap-breakpoint-add :which-key "add breakpoint")
-  "c b r" '(dap-breakpoint-delete :which-key "remove breakpoint")
-  "c b R" '(dap-breakpoint-delete-all :which-key "remove all breakpoints")
+  "c b b" '(dap-breakpoint-toggle :which-key "toggle breakpoint")
+  "c b B" '(dap-breakpoint-delete-all :which-key "remove all breakpoints")
   "c b n" '(dap-next :which-key "next")
   "c b i" '(dap-step-in :which-key "step in")
   "c b I" '(dap-step-out :which-key "step out")
   "c b d" '(dap-debug :which-key "start debug")
+  "c b r" '(dap-debug-last :which-key "start debug (previous)")
   "c b c" '(dap-continue :which-key "continue")
+  "c b x" '(dap-disconnect :which-key "stop debugging")
+
+  "s" '(:ignore t :which-key "search")
+  "s p" '(projectile-ripgrep :which-key "search project")
+
+  "o" '(:ignore t :which-key "org")
+  "o a" '(org-agenda :which-key "agenda")
+  "o c" '(org-capture :which-key "capture")
+
+ )
+(provide 'keybindings)
 
   "s" '(:ignore t :which-key "search")
   "s p" '(projectile-ripgrep :which-key "search project")
