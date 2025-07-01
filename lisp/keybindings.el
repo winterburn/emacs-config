@@ -39,6 +39,7 @@
   "c X" '(flymake-show-project-diagnostics :which-key "project error list")
   "c n" '(flymake-goto-next-error :which-key "next error")
   "c p" '(flymake-goto-prev-error :which-key "previous error")
+  ;; Debug things
   "c b" '(:ignore t :which-key "debug")
   "c b b" '(dap-breakpoint-toggle :which-key "toggle breakpoint")
   "c b B" '(dap-breakpoint-delete-all :which-key "remove all breakpoints")
@@ -56,6 +57,8 @@
   "o" '(:ignore t :which-key "org")
   "o a" '(org-agenda :which-key "agenda")
   "o c" '(org-capture :which-key "capture")
+  "o k" '(org-todo :which-key "cycle todo")
+  "o o" '(org-open-at-point :which-key "Open link at point")
 
  )
 (provide 'keybindings)

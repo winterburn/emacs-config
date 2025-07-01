@@ -9,6 +9,11 @@
 
 (setq visible-bell t) ; Set up the visible bell
 
+(use-package org
+  :config
+  (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d@)" "CANCELED(c@)"))
+	org-log-done 'time
+        org-default-notes-file (concat org-directory "/notes.org")))
 ;; Make esc quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -292,6 +297,12 @@
     "s s" '(consult-line :which-key "search in buffer.")))
 (use-package consult-lsp)
 
+(use-package format-all
+  :commands format-all-mode
+  :hook (prog-mode . format-all-mode)
+  :config
+  (setq-default format-all-formatters '(("Python" (black)))))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -301,7 +312,7 @@
  '(custom-safe-themes
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
  '(package-selected-packages
-   '(dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(format-all dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
