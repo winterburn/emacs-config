@@ -301,7 +301,7 @@
   :commands format-all-mode
   :hook (prog-mode . format-all-mode)
   :config
-  (setq-default format-all-formatters '(("Python" (black)))))
+  (setq-default format-all-formatters '(("Python" (ruff "format")))))
 
 
 (custom-set-variables
