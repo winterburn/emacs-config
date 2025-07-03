@@ -241,6 +241,11 @@
   (after-init . yas-reload-all))
 (use-package yasnippet-snippets)
 (use-package company
+  :bind(:map company-active-map
+	     ("<return>" . nil)
+	     ("RET" . nil)
+	     ("TAB" . company-complete-selection)
+	     ("<tab>" . company-complete-selection))
   :hook (after-init . global-company-mode))
 
 (use-package envrc
