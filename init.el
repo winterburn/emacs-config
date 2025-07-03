@@ -50,9 +50,74 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package ivy
-  :config
-  (ivy-mode 1))
+;; (use-package ivy
+;;   :config
+;;   (ivy-mode 1))
+;;(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+;; (use-package ivy-rich
+;;   :init
+;;   (ivy-rich-mode 1))
+;; (use-package counsel
+;;   :bind (("M-x" . counsel-M-x)
+;; 	 ("C-x C-f" . counsel-find-file)))
+;; (use-package counsel-projectile
+;;   :init
+;;   (counsel-projectile-mode 1)
+;;   :config
+;;   (my/leader-keys
+;;     "p" 'projectile-command-map))
+
+(use-package vertico
+  :custom
+  (vertico-scroll-margin 0) ;; Different scroll margin
+  ;; (vertico-count 20) ;; Show more candidates
+  ;; (vertico-resize t) ;; Grow and shrink the Vertico minibuffer
+  ;; (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  :init
+  (vertico-mode))
+
+(use-package savehist
+  :init
+  (savehist-mode))
+
+(use-package emacs
+  :custom
+  ;; Enable context menu. `vertico-multiform-mode' adds a menu in the minibuffer
+  ;; to switch display modes.
+  (context-menu-mode t)
+  ;; Support opening new minibuffers from inside existing minibuffers.
+  (enable-recursive-minibuffers t)
+  ;; Hide commands in M-x which do not work in the current mode.  Vertico
+  ;; commands are hidden in normal buffers. This setting is useful beyond
+  ;; Vertico.
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  ;; Do not allow the cursor in the minibuffer prompt
+  (minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt)))
+
+(use-package orderless
+  :custom
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch))
+  ;; (orderless-component-separator #'orderless-escapable-split-on-space)
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
+
+(use-package marginalia
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+
+  ;; The :init section is always executed.
+  :init
+
+  ;; Marginalia must be activated in the :init section of use-package such that
+  ;; the mode gets enabled right away. Note that this forces loading the
+  ;; package.
+  (marginalia-mode))
 
 (use-package nerd-icons
   :custom
@@ -94,22 +159,16 @@
   :config
   (setq which-key-idle-delay 0.3))
 
-(use-package ivy-rich
-  :init
-  (ivy-rich-mode 1))
 
-(use-package counsel
-  :bind (("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)))
 
 (use-package helpful
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
+  ;; :custom
+  ;; (counsel-describe-function-function #'helpful-callable)
+  ;; (counsel-describe-variable-function #'helpful-variable)
   :bind
-  ([remap describe-function] . counsel-describe-function)
+  ;; ([remap describe-function] . counsel-describe-function)
   ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
+  ;; ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
 (use-package evil
@@ -174,7 +233,6 @@
   (setq lsp-headerline-breadcrumb-segments '(project file symbols)))
 
 (use-package lsp-ui :commands lsp-ui-mode)
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 (use-package lsp-pyright
   :custom (lsp-pyright-langserver-command "pyright"))
 
@@ -225,12 +283,6 @@
   :config
   (setq projectile-project-search-path '(("~/repos/" . 1) ( "/mnt/d/Koodia/" . 1))))
 
-(use-package counsel-projectile
-  :init
-  (counsel-projectile-mode 1)
-  :config
-  (my/leader-keys
-    "p" 'projectile-command-map))
 
 (use-package centaur-tabs
   :demand
@@ -252,7 +304,7 @@
   (centaur-tabs-group-by-projectile-project)
   (my/leader-keys
     "t" '(:ignore t :which-key "tabs")
-    "t g" '(centaur-tabs-counsel-switch-group :which-key "select group")
+    "t g" '(centaur-tabs-switch-group :which-key "select group")
     "t t" '(centaur-tabs-forward :which-key "tab forward")
     "t T" '(centaur-tabs-backward :which-key "tab backward")
     "t u" '(centaur-tabs-backward-group :which-key "group backward")
@@ -312,7 +364,7 @@
  '(custom-safe-themes
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
  '(package-selected-packages
-   '(format-all dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(vertico marginalia orderless vertigo format-all dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

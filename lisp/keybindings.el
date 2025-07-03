@@ -7,7 +7,7 @@
   :global-prefix "C-SPC")
 
 (my/leader-keys
-  ":" '(counsel-M-x :which-key "execute commands")
+  ":" '(execute-extended-command :which-key "execute commands")
   "SPC" '(projectile-find-file :which-key "find file in project")
 
   "f" '(:ignore t :which-key "files")
@@ -59,6 +59,8 @@
   "o c" '(org-capture :which-key "capture")
   "o k" '(org-todo :which-key "cycle todo")
   "o o" '(org-open-at-point :which-key "Open link at point")
+
+  "p" '(projectile-command-map :which-key "projects")
 
  )
 (provide 'keybindings)
