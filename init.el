@@ -9,11 +9,6 @@
 
 (setq visible-bell t) ; Set up the visible bell
 
-(use-package org
-  :config
-  (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d@)" "CANCELED(c@)"))
-	org-log-done 'time
-        org-default-notes-file (concat org-directory "/notes.org")))
 ;; Make esc quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -50,6 +45,11 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(use-package org
+  :config
+  (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d@)" "CANCELED(c@)"))
+	org-log-done 'time
+        org-default-notes-file (concat org-directory "/notes.org")))
 ;; (use-package ivy
 ;;   :config
 ;;   (ivy-mode 1))
