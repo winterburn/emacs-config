@@ -1,5 +1,4 @@
 (setq inhibit-startup-message t)
-(setq custom-safe-themes t)
 
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1)   ; Disable the toolbar
@@ -138,7 +137,7 @@
   (doom-themes-enable-bold t)
   (doom-themes-enable-italic t)
   :config
-  (load-theme 'doom-tokyo-night)
+  (load-theme 'doom-tokyo-night t)
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
