@@ -369,6 +369,11 @@
   :config
   (setq-default format-all-formatters '(("Python" (ruff "format")))))
 
+(use-package avy
+  :config
+  (my/leader-keys
+    "s f" '(avy-goto-char-timer :which-key "find in window")))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
