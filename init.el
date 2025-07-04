@@ -283,11 +283,17 @@
 (setopt company-backends '((company-capf company-dabbrev-code)))
 
 (use-package projectile
-  :hook
-  (after-init . projectile-discover-projects-in-search-path)
+  :init
+  (setq projectile-enable-caching t)
   :config
-  (setq projectile-project-search-path '(("~/repos/" . 1) ( "/mnt/d/Koodia/" . 1))))
-
+  (let ((paths '(("~/repos/" . 1)
+		 ("/mnt/d/Koodia/" .1))))
+    (dolist (path-depth paths)
+      (let ((dir (car path-depth))
+	    (depth (cdr path-depth)))
+	(when (file-directory-p dir)
+	  (add-to-list 'projectile-project-search-path (cons dir depth))))))
+  (projectile-mode +1))
 
 (use-package centaur-tabs
   :demand
