@@ -374,6 +374,17 @@
   (my/leader-keys
     "s f" '(avy-goto-char-timer :which-key "find in window")))
 
+(use-package hydra)
+
+(defhydra hydra-zoom ()
+  "zoom"
+  ("k" text-scale-increase "in")
+  ("j" text-scale-decrease "out")
+  ("f" nil "finished" :exit t))
+
+(my/leader-keys
+  "u" '(:ignore t :which-key "toggles")
+  "u z" '(hydra-zoom/body :which-key "zoom"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
