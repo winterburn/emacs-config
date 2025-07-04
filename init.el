@@ -214,7 +214,8 @@
     )
 
 (use-package git-gutter
-  :hook (prog-mode . git-gutter-mode))
+  :hook ((prog-mode . git-gutter-mode)
+	 (magit-post-refresh . git-gutter:update-all-windows)))
 (use-package git-gutter-fringe
   :config
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
