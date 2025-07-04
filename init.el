@@ -360,7 +360,8 @@
   (setq consult-project-function (lambda (_) (projectile-project-root)))
   :config
   (my/leader-keys
-    "s s" '(consult-line :which-key "search in buffer.")))
+    "s s" '(consult-line :which-key "search in buffer.")
+    "s S" '(consult-line-multi :which-key "search in project.")))
 (use-package consult-lsp)
 
 (use-package format-all
