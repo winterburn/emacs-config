@@ -207,11 +207,14 @@
 
 (use-package magit
   :config
-    (my/leader-keys
-      "g" '(:ignore t :which-key "git")
-      "g g" '(magit-status :which-key "status")
-    )
-    )
+  (custom-set-faces
+   '(magit-blame-heading ((t (:background "SlateBlue4")))))
+  (my/leader-keys
+    "g" '(:ignore t :which-key "git")
+    "g g" '(magit-status :which-key "status")
+    "g b" '(magit-blame-addition :which-key "blame")
+    "g f" '(magit-fetch :which-key "fetch")
+    "g F" '(magit-fetch-all :which-key "fetch-all")))
 
 (use-package git-gutter
   :hook ((prog-mode . git-gutter-mode)
