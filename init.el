@@ -46,7 +46,7 @@
 
 (use-package org
   :config
-  (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d@)" "CANCELED(c@)"))
+  (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d)" "CANCELED(c@)"))
 	org-log-done 'time
         org-default-notes-file (concat org-directory "/notes.org")))
 ;; (use-package ivy

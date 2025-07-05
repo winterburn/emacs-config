@@ -59,6 +59,10 @@
   "o c" '(org-capture :which-key "capture")
   "o k" '(org-todo :which-key "cycle todo")
   "o o" '(org-open-at-point :which-key "Open link at point")
+  "o t" '(:ignore t :which-key "clock")
+  "o t i" '(org-clock-in :which-key "clock in")
+  "o t o" '(org-clock-out :which-key "clock out")
+  "o t j" '(org-clock-goto :which-key "jump to current clock")
 
   "p" '(projectile-command-map :which-key "projects")
 
