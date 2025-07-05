@@ -49,6 +49,11 @@
   (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d)" "CANCELED(c@)"))
 	org-log-done 'time
         org-default-notes-file (concat org-directory "/notes.org")))
+
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode))
+
 ;; (use-package ivy
 ;;   :config
 ;;   (ivy-mode 1))
@@ -395,11 +400,11 @@
  '(custom-safe-themes
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
  '(package-selected-packages
-   '(vertico marginalia orderless vertigo format-all dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(org-bullets vertico marginalia orderless vertigo format-all dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(magit-blame-heading ((t (:extend t :background "SlateBlue4" :foreground "#ff9e64")))))
+ '(magit-blame-heading ((t (:background "SlateBlue4")))))
