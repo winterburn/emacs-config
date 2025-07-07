@@ -5,3 +5,5 @@ eln-cache
 transient
 *.eld
 *~
+history
+org-clock-save.el

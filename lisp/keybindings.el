@@ -52,7 +52,7 @@
   "c b x" '(dap-disconnect :which-key "stop debugging")
 
   "s" '(:ignore t :which-key "search")
-  "s p" '(projectile-ripgrep :which-key "search project")
+  "s p" '(consult-ripgrep :which-key "search project")
 
   "o" '(:ignore t :which-key "org")
   "o a" '(org-agenda :which-key "agenda")
