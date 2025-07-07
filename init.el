@@ -183,6 +183,9 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  :bind
+  (:map evil-normal-state-map
+	("C-u" . evil-scroll-up))
   :config
   (evil-mode 1))
 
@@ -396,6 +399,8 @@
   "u" '(:ignore t :which-key "toggles")
   "u z" '(hydra-zoom/body :which-key "zoom"))
 
+(use-package rg)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -404,7 +409,7 @@
  '(custom-safe-themes
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
  '(package-selected-packages
-   '(org-bullets vertico marginalia orderless vertigo format-all dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(rg org-bullets vertico marginalia orderless vertigo format-all dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
