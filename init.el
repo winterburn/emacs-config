@@ -49,7 +49,13 @@
   (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d)" "CANCELED(c@)"))
 	org-log-done 'time
         org-default-notes-file (concat org-directory "/notes.org")
-	org-clock-persist 'history)
+	org-clock-persist 'history
+	org-capture-templates
+	'(("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
+	   "* TODO %?\n %U\n %a")
+	  ("p" "Python Note"
+	   entry (file+headline "~/org/notes.org" "Python Notes")
+	   "* %^{heading}\n:PROPERTIES:\n:Captured: %U\n:Source: [[%F::%(with-current-buffer (org-capture-get :original-buffer) (number-to-string (line-number-at-pos)))][%f]]\n:END:\n\n#+BEGIN_SRC python \n%i\n#+END_SRC\n\n%?")))
   (org-clock-persistence-insinuate))
 
 

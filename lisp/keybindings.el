@@ -13,6 +13,7 @@
   "f" '(:ignore t :which-key "files")
   "f f" '(find-file :which-key "find file")
   "f s" '(save-buffer :which-key "save file")
+  "f c" '(copy-file :which-key "copy file")
 
   "b" '(:ignore t :which-key "buffers")
   "b b" '(consult-buffer :which-key "switch buffer")
