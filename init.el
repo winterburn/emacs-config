@@ -247,7 +247,12 @@
   (lsp-headerline-breadcrumb-mode 1)
   (setq lsp-headerline-breadcrumb-segments '(project file symbols)))
 
-(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :bind
+  ([remap evil-jump-backward] . lsp-ui-peek-jump-backward)
+  ([remap evil-jump-forward] . lsp-ui-peek-jump-forward))
+
 (use-package lsp-pyright
   :custom (lsp-pyright-langserver-command "pyright"))
 
@@ -270,8 +275,7 @@
   :init
   (setopt dap-auto-configure-mode t)
   :after lsp-mode
-  :commands dab-debug
-  :hook ((python-mode . dap-mode)))
+  :commands dab-debug)
 
 
 (defmacro company-backend-for-hook (hook backends)
@@ -291,7 +295,8 @@
   (require 'lsp-pyright)
   (lsp-deferred)
   (require 'dap-python)
-  (setq dap-python-debugger 'debugpy))
+  (setq dap-python-debugger 'debugpy)
+  (dap-mode 1))
 
 (add-hook 'python-mode-hook #'my/setup-python-environment)
 
