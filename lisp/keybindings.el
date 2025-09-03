@@ -11,6 +11,10 @@
   ":" '(execute-extended-command :which-key "execute commands")
   "SPC" '(projectile-find-file :which-key "find file in project")
 
+  "TAB" '(:ignore t :which-key "Perspective")
+  "TAB TAB" '(persp-switch :which-key "switch")
+  "TAB n" '(persp-new :which-key "new")
+
   "f" '(:ignore t :which-key "files")
   "f f" '(find-file :which-key "find file")
   "f s" '(save-buffer :which-key "save file")
