@@ -335,56 +335,6 @@
 	  (add-to-list 'projectile-project-search-path (cons dir depth))))))
   (projectile-mode +1))
 
-(use-package centaur-tabs
-  :demand
-  :bind
-  (:map evil-normal-state-map
-	("g t" . centaur-tabs-forward)
-	("g T" . centaur-tabs-backward))
-  :config
-  (centaur-tabs-mode t)
-  (setq centaur-tabs-style "wave"
-        centaur-tabs-set-icons t
-        centaur-tabs-icon-type 'nerd-icons
-        centaur-tabs-set-bar 'under
-        x-underline-at-descent-line t
-        centaur-tabs-set-close-button nil
-        centaur-tabs-set-modified-marker t
-        centaur-tabs-cycle-scope 'tabs
-	centaur-tabs-height 32)
-  (centaur-tabs-group-by-projectile-project)
-  (my/leader-keys
-    "t" '(:ignore t :which-key "tabs")
-    "t g" '(centaur-tabs-switch-group :which-key "select group")
-    "t t" '(centaur-tabs-forward :which-key "tab forward")
-    "t T" '(centaur-tabs-backward :which-key "tab backward")
-    "t u" '(centaur-tabs-backward-group :which-key "group backward")
-    "t i" '(centaur-tabs-forward-group :which-key "group forward")
-    "t k" '(centaur-tabs-kill-other-buffers-in-current-group :which-key "kill other buffers"))
-  (defun centaur-tabs-hide-tab (x)
-  "Do no to show buffer X in tabs."
-  (let ((name (format "%s" x)))
-    (or
-    ;; Current window is not dedicated window.
-    (window-dedicated-p (selected-window))
-    
-    ;; Buffer name not match below blacklist.
-    (string-prefix-p "*epc" name)
-    (string-prefix-p "*helm" name)
-    (string-prefix-p "*Helm" name)
-    (string-prefix-p "*Compile-Log*" name)
-    (string-prefix-p "*lsp" name)
-    (string-prefix-p "*company" name)
-    (string-prefix-p "*Flycheck" name)
-    (string-prefix-p "*tramp" name)
-    (string-prefix-p " *Mini" name)
-    (string-prefix-p "*help" name)
-    (string-prefix-p "*straight" name)
-    (string-prefix-p " *temp" name)
-    (string-prefix-p "*Help" name)
-    (string-prefix-p "magit" name)
-    ))))
-
 (use-package consult
   :hook (completion-list-mode . consult-preview-at-point-mode)
   :init
@@ -434,6 +384,10 @@
   (global-flycheck-mode))
 
 (use-package flycheck-projectile)
+
+
+(use-package pespective
+  
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
