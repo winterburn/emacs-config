@@ -1,6 +1,7 @@
-;; keybinding definitions
+;;; Package --- Summary keybinding definitions
 
 
+;;; Code:
 (general-create-definer my/leader-keys
   :keymaps '(normal visual emacs)
   :prefix "SPC"
@@ -36,10 +37,10 @@
   "c d" '(lsp-ui-peek-find-definitions :which-key "definition")
   "c r" '(lsp-ui-peek-find-references :which-key "references")
   "c c" '(lsp-rename :which-key "rename")
-  "c x" '(flymake-show-buffer-diagnostics :which-key "buffer error list")
-  "c X" '(flymake-show-project-diagnostics :which-key "project error list")
-  "c n" '(flymake-goto-next-error :which-key "next error")
-  "c p" '(flymake-goto-prev-error :which-key "previous error")
+  "c x" '(flycheck-list-errors :which-key "buffer error list")
+  "c X" '(flycheck-projectile-list-errors :which-key "project error list")
+  "c n" '(flycheck-next-error :which-key "next error")
+  "c p" '(flycheck-previous-error :which-key "previous error")
   ;; Debug things
   "c b" '(:ignore t :which-key "debug")
   "c b b" '(dap-breakpoint-toggle :which-key "toggle breakpoint")
@@ -69,3 +70,4 @@
 
  )
 (provide 'keybindings)
+;;; keybindings.el ends here

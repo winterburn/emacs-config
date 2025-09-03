@@ -44,6 +44,11 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(use-package exec-path-from-shell)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 (use-package org
   :config
   (setq org-todo-keywords '((sequence "TODO(t)" "IN PROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d)" "CANCELED(c@)"))
@@ -89,6 +94,11 @@
   ;; (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
   :init
   (vertico-mode))
+
+(use-package vertico-prescient
+  :init
+  (vertico-prescient-mode)
+  (prescient-persist-mode))
 
 (use-package savehist
   :init
@@ -274,6 +284,10 @@
 	     ("<tab>" . company-complete-selection))
   :hook (after-init . global-company-mode))
 
+(use-package company-prescient
+  :init
+  (company-prescient-mode))
+
 (use-package envrc
   :hook (after-init . envrc-global-mode))
 
@@ -415,6 +429,12 @@
 (use-package indent-bars
   :hook ((python-mode) . indent-bars-mode))
 
+(use-package flycheck
+  :init
+  (global-flycheck-mode))
+
+(use-package flycheck-projectile)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -423,7 +443,7 @@
  '(custom-safe-themes
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
  '(package-selected-packages
-   '(indent-bars rg org-bullets vertico marginalia orderless vertigo format-all dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(flycheck-projectile flycheck company-prescient vertico-prescient indent-bars rg org-bullets vertico marginalia orderless vertigo format-all dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
