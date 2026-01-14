@@ -19,6 +19,7 @@
   "f f" '(find-file :which-key "find file")
   "f s" '(save-buffer :which-key "save file")
   "f c" '(copy-file :which-key "copy file")
+  "f d" '(delete-file :which-key "delete file")
 
   "b" '(:ignore t :which-key "buffers")
   "b b" '(consult-buffer :which-key "switch buffer")
