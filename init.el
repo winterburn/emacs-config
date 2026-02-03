@@ -395,6 +395,7 @@
 
 (use-package persp-projectile)
   
+(use-package copilot-chat)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -402,9 +403,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d" default))
+   '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d"
+     default))
  '(package-selected-packages
-   '(persp-projectile perspective pespective flycheck-projectile flycheck company-prescient vertico-prescient indent-bars rg org-bullets vertico marginalia orderless vertigo format-all dap-python dap-mode consult-lsp git-gutter-fringe git-gutter projectile evil-commentary yasnippet-snippets yasnippet evil-surround lsp-ivy lsp-mode company envrc magit evil-collection general evil helpful counsel ivy-rich which-key rainbow-delimiters doom-themes nerd-icons doom-modeline ivy))
+   '(avy company-prescient consult consult-lsp copilot-chat dap-mode
+	 doom-modeline doom-themes envrc evil-collection
+	 evil-commentary evil-surround exec-path-from-shell
+	 flycheck-projectile format-all general git-gutter-fringe
+	 helpful ht hydra indent-bars lsp-mode lsp-pyright lsp-ui
+	 magit marginalia orderless org-bullets persp-projectile
+	 rainbow-delimiters rg vertico-prescient yaml
+	 yasnippet-snippets))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

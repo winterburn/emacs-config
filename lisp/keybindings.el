@@ -57,6 +57,8 @@
   "c b r" '(dap-debug-last :which-key "start debug (previous)")
   "c b c" '(dap-continue :which-key "continue")
   "c b x" '(dap-disconnect :which-key "stop debugging")
+  ;; copilot chat transient
+  "c h" '(copilot-chat-transient :which-key "copilot-chat")
 
   "s" '(:ignore t :which-key "search")
   "s p" '(consult-ripgrep :which-key "search project")
