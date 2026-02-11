@@ -1,5 +1,8 @@
 (setq inhibit-startup-message t)
 
+(when (and (eq system-type 'darwin) (display-graphic-p))
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'option))
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1)   ; Disable the toolbar
 (tooltip-mode -1)    ; Disable tooltips
