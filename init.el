@@ -399,7 +399,10 @@
 (use-package persp-projectile)
   
 (use-package copilot-chat)
-
+(use-package agent-shell
+  :ensure-system-package
+  ((copilot . "brew install copilot-cli")))
+(setq agent-shell-preferred-agent-config (agent-shell-github-make-copilot-config))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -409,14 +412,15 @@
    '("4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d"
      default))
  '(package-selected-packages
-   '(avy company-prescient consult consult-lsp copilot-chat dap-mode
-	 doom-modeline doom-themes envrc evil-collection
-	 evil-commentary evil-surround exec-path-from-shell
-	 flycheck-projectile format-all general git-gutter-fringe
-	 helpful ht hydra indent-bars lsp-mode lsp-pyright lsp-ui
-	 magit marginalia orderless org-bullets persp-projectile
-	 rainbow-delimiters rg vertico-prescient yaml
-	 yasnippet-snippets))
+   '(agent-shell avy company-prescient consult consult-lsp copilot-chat
+		 dap-mode doom-modeline doom-themes envrc
+		 evil-collection evil-commentary evil-surround
+		 exec-path-from-shell flycheck-projectile format-all
+		 general git-gutter-fringe helpful ht hydra
+		 indent-bars lsp-mode lsp-pyright lsp-ui magit
+		 marginalia orderless org-bullets persp-projectile
+		 rainbow-delimiters rg vertico-prescient yaml
+		 yasnippet-snippets))
  '(safe-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
